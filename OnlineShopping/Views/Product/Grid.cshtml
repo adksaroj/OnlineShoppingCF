@@ -1,0 +1,42 @@
+﻿@model IEnumerable<OnlineShoppingDataAccess.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2 class="page-header text-center">Product</h2>
+
+<p>
+    @if (User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Create New", "add", "product", routeValues: null, htmlAttributes: new { @class = "btn btn-success", @role = "button" })
+    }
+</p>
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <a href="~/product/details/@item.Id">
+                <img class="img-rounded" width="200" height="200" src="@Url.Content("~/static/products/")@item.ImageName" alt="@item.ProductName">
+            </a>
+            <div class="caption  " text-center">
+                <h3>
+                    @Html.ActionLink(item.ProductName, "details", new { id = item.Id }, htmlAttributes: new { @class = "h3 text-success" })
+                </h3>
+                <p class="text-justify">
+                    @Html.DisplayFor(modelItem => item.Description)
+                <p>
+                    @if (User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Details", "details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+                        <span>@Html.ActionLink("Edit", "edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-success" })</span>
+                        <span>@Html.ActionLink("Delete", "delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })</span>
+                    }
+                </p>
+            </div>
+            <br />
+            <br />
+        </div>
+    }
+</div>
