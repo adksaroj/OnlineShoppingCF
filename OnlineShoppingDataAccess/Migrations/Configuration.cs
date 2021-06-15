@@ -24,7 +24,7 @@
             user.Password = "ZGVtb3VzZXI=";
             user.Email = "demouser@xyz.com";
             user.Role = "user";
-            user.Address = "Balijan Dhekiajuli Sonitpur Assam 784112";
+            user.Address = "Dhekiajuli Sonitpur Assam 784112";
 
             context.Users.AddOrUpdate(user);
         }
