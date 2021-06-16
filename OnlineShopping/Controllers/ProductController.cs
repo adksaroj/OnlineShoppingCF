@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OnlineShopping.Models;
+using OnlineShoppingDataAccess;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using OnlineShopping.Models;
-using OnlineShoppingDataAccess;
-using Newtonsoft.Json;
 
 namespace OnlineShopping.Controllers
 {

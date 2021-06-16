@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using OnlineShopping.Models;
+﻿using OnlineShopping.Models;
 using OnlineShopping.Utilities;
+using System;
+using System.Web.Mvc;
 
 namespace OnlineShopping.Controllers
 {
@@ -26,7 +23,7 @@ namespace OnlineShopping.Controllers
                 {
                     orderTot += item.product.Cost;
                 }
-                checkOut.OrderTotal = Math.Round(orderTot,2);
+                checkOut.OrderTotal = Math.Round(orderTot, 2);
 
                 checkOut.ShippingAddress = checkOut.User.Address;
 

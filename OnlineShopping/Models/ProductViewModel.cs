@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace OnlineShopping.Models
@@ -27,7 +24,7 @@ namespace OnlineShopping.Models
         [Required(ErrorMessage = "Category is required")]
         [DataType(DataType.Text)]
         public string Category { get; set; }
-        
+
         public HttpPostedFileBase Image { get; set; }
 
         [Required(ErrorMessage = "Description is required")]

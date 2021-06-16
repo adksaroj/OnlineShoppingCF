@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OnlineShoppingDataAccess;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
-using OnlineShoppingDataAccess;
 
 namespace OnlineShopping.Providers
 {
@@ -38,7 +36,7 @@ namespace OnlineShopping.Providers
 
         public override string[] GetRolesForUser(string username)
         {
-            using(OnlineShoppingContext context = new OnlineShoppingContext())
+            using (OnlineShoppingContext context = new OnlineShoppingContext())
             {
                 var result = context.Users.Where(u => u.Email == username).Select(u => u.Role).ToArray();
                 return result;

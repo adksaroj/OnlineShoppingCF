@@ -1,11 +1,10 @@
-﻿using System;
+﻿using OnlineShopping.Models;
+using OnlineShopping.Utilities;
+using OnlineShoppingDataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using OnlineShoppingDataAccess;
-using OnlineShopping.Utilities;
-using OnlineShopping.Models;
 
 namespace OnlineShopping.Controllers
 {
@@ -30,10 +29,10 @@ namespace OnlineShopping.Controllers
                 {
                     var cart = CartUtility.GetCartItemForUser(User.Identity.Name);
 
-                    if ( cart!= null)
+                    if (cart != null)
                     {
                         var order = new Order();
-                        order.Id = UserUtility.GetUserByUserId(User.Identity.Name).Id;
+                        order.ClientId = UserUtility.GetUserByUserId(User.Identity.Name).Id;
                         order.Quantity = 1;
                         order.Date = DateTime.Now;
                         order.OrderStatus = "Ordered";
@@ -49,6 +48,44 @@ namespace OnlineShopping.Controllers
 
 
             return RedirectToAction("checkout");
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult CreateV2()
+        {
+            if (ModelState.IsValid)
+            {
+                using (OnlineShoppingContext dbContext = new OnlineShoppingContext())
+                {
+                    var currentUserId = UserUtility.GetUserByUserId(User.Identity.Name).Id;
+                    var cart = dbContext.
+                                        Carts.
+                                        Where(x => x.UserId == currentUserId).
+                                        SelectMany(p => p.Products).ToList();
+
+                    if (cart != null)
+                    {
+                        var order = new Order();
+                        order.ClientId = UserUtility.GetUserByUserId(User.Identity.Name).Id;
+                        order.Quantity = 1;
+                        order.Date = DateTime.Now;
+                        order.OrderStatus = "Ordered";
+                        order.Price = 500;
+
+                        foreach (var item in cart)
+                        {
+                            order.Products.Add(item);
+                        }
+
+                        dbContext.Orders.Add(order);
+                        dbContext.SaveChanges();
+                    }
+                }
+                return RedirectToAction("myorders");
+
+            }
+            return View();
         }
 
         public ActionResult MyOrders()

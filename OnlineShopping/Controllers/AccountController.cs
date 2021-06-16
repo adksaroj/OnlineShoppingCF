@@ -1,11 +1,8 @@
 ﻿using OnlineShopping.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using OnlineShoppingDataAccess;
 using OnlineShopping.Utilities;
+using OnlineShoppingDataAccess;
+using System.Linq;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace OnlineShopping.Controllers
@@ -16,7 +13,7 @@ namespace OnlineShopping.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.Error = "No Error";
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
                 return RedirectToAction("index", "home");
             else
             {

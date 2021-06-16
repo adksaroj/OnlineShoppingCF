@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopping.Models
 {
@@ -20,7 +16,7 @@ namespace OnlineShopping.Models
 
         [Required(ErrorMessage = "Confirm Password is required")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage ="Password and confirm password must match.")]
+        [Compare("Password", ErrorMessage = "Password and confirm password must match.")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Email Address")]
